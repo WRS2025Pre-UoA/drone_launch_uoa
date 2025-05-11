@@ -48,19 +48,17 @@ def generate_launch_description():
         output="screen",
     )
    
-    # load_composable_nodes = LoadComposableNodes(
-    #     target_container="my_container",
-    #     composable_node_descriptions=[
-    #         ComposableNode(
-    #             package="listener",
-    #             plugin="Listener",
-    #             name="listener",
-    #             extra_arguments=[{"use_intra_process_comms": True}],
-    #         ),
-    #     ],
-    # )
+    python_node = Node(
+        package='misora2_dt_client',
+        executable='client_node.py',
+        name='client',
+        namespace=namespace_1,
+        parameters=[{"host": ""},{"robot_id": ""},{"mission": "P4"}],
+        output='screen',
+    )
     
     return LaunchDescription([
         container, 
+        python_node,
         # load_composable_nodes
     ])

@@ -20,9 +20,7 @@ def generate_launch_description():
                             {"check_duration_sec": 1.0},
                             {"timer_interval_ms": 200}],
                 # remappings=[("raw_image" , "/arm_camera/realsense2_camera_node/color/image_raw")]
-                remappings=[("raw_image" , "/camera/camera/color/image_raw"),
-                            ("qr_image","drone/qr_image"),
-                            ]#テスト用
+                remappings=[("raw_image" , "/camera/camera/color/image_raw")]#テスト用
             ),
             ComposableNode( # ここにmisora2_dt_clientを入力
                 package="misora2_dt_client",
@@ -51,19 +49,17 @@ def generate_launch_description():
     )
   
     
-    # load_composable_nodes = LoadComposableNodes(
-    #     target_container="my_container",
-    #     composable_node_descriptions=[
-    #         ComposableNode(
-    #             package="listener",
-    #             plugin="Listener",
-    #             name="listener",
-    #             extra_arguments=[{"use_intra_process_comms": True}],
-    #         ),
-    #     ],
-    # )
+    python_node = Node(
+        package='misora2_dt_client',
+        executable='client_node.py',
+        name='client',
+        namespace=namespace_1,
+        parameters=[{"host": ""},{"robot_id": ""},{"mission": "P1"}],
+        output='screen',
+    )
     
     return LaunchDescription([
-        container, 
+        container,
+        python_node, 
         # load_composable_nodes
     ])
