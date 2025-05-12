@@ -13,5 +13,5 @@ git clone git@github.com:WRS2025Pre-UoA/drone_launch_uoa.git
 cd [ワークスペース]
 colcon build
 source install/setup.bash
-ros2 launch drone_launch_uoa bringupP[1~4,6].launch.py
+ros2 launch drone_launch_uoa bringupP<1~4,6>.launch.py
 ~~~
