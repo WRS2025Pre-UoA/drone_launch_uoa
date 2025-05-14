@@ -21,12 +21,13 @@ def generate_launch_description():
                             {"check_duration_sec": 1.0},
                             {"timer_interval_ms": 200}],
                 # remappings=[("raw_image" , "/arm_camera/realsense2_camera_node/color/image_raw")]
-                remappings=[("raw_image" , "/camera/camera/color/image_raw")]#テスト用
+                # remappings=[("raw_image" , "/camera/camera/color/image_raw")]#テスト用
+                remappings=[("raw_image" , "image_raw")]
             ),
             ComposableNode( # ここにmisora2_dt_clientを入力
                 package="misora2_dt_client",
                 plugin="dt_client_component::DTClient",
-                name="dt_client",
+                name="confirmation_screen",
                 namespace=namespace_1,
                 extra_arguments=[{"use_intra_process_comms": True}],
                 parameters=[{"mode": "P2"}]
