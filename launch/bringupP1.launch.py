@@ -18,7 +18,11 @@ def generate_launch_description():
                 extra_arguments=[{"use_intra_process_comms": True}],
                 parameters=[{"mode": "P1"},
                             {"check_duration_sec": 1.0},
-                            {"timer_interval_ms": 200}],
+                            {"timer_interval_ms": 200},
+                            {"top_left_x": 100},
+                            {"top_right_y": 100},
+                            {"rect_width": 300},
+                            {"rect_height": 300}],
                 # remappings=[("raw_image" , "/arm_camera/realsense2_camera_node/color/image_raw")]
                 # remappings=[("raw_image" , "/camera/camera/color/image_raw")]#テスト用
                 remappings=[("raw_image" , "image_raw")]
