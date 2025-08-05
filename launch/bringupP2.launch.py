@@ -21,7 +21,7 @@ def generate_launch_description():
                             {"check_duration_sec": 1.0},
                             {"timer_interval_ms": 200},
                             {"top_left_x": 100},
-                            {"top_right_y": 100},
+                            {"top_left_y": 100},
                             {"rect_width": 300},
                             {"rect_height": 300}],
                 # remappings=[("raw_image" , "/arm_camera/realsense2_camera_node/color/image_raw")]
