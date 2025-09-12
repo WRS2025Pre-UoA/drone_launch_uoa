@@ -16,22 +16,21 @@ def generate_launch_description():
                 name="drone_gui",
                 namespace=namespace_1,
                 extra_arguments=[{"use_intra_process_comms": True}],
-                parameters=[{"mode": "P4"},
+                parameters=[{"mode": "P5"},
                             {"top_left_x": 128},
                             {"top_left_y": 55},
                             {"rect_width": 1000},
                             {"rect_height": 564}],
-                # remappings=[("image_raw" , "/arm_camera/realsense2_camera_node/color/image_raw")]
-                # remappings=[("image_raw" , "/camera/camera/color/image_raw")]#テスト用
-                # remappings=[("image_raw" , "image_raw")]
+                # remappings=[("raw_image" , "/arm_camera/realsense2_camera_node/color/image_raw")]
+                # remappings=[("raw_image" , "/camera/camera/color/image_raw")]#テスト用
+                # remappings=[("raw_image" , "image_raw")]
             ),
             ComposableNode(
                 package="misora2_distribute_image",
                 plugin="component_distribute_image::DistributeImage",
                 name="distribute_image",
-                namespace=namespace_1,
                 extra_arguments=[{"use_intra_process_comms": True}],
-                parameters=[{"mode": "P4"}, 
+                parameters=[{"mode": "P5"}, 
                             {"check_duration_sec": 1.0}, 
                             {"timer_interval_ms": 100}], #画像を何millisec間隔で流すか、また何s間流すか
                 remappings=[("raw_image" , "drone_image_cropped")]
@@ -43,13 +42,6 @@ def generate_launch_description():
                 namespace=namespace_1,
                 extra_arguments=[{"use_intra_process_comms": True}],
             ),
-            ComposableNode(
-                package="misora2_pressure",
-                plugin="component_pressure::PressureMeasurement",
-                name="pressure",
-                namespace=namespace_1,
-                extra_arguments=[{"use_intra_process_comms": True}],
-            )
         ],
         output="screen",
     )
@@ -59,12 +51,12 @@ def generate_launch_description():
         executable='client_node_value.py',
         name='client',
         namespace=namespace_1,
-        parameters=[{"host": "stg.rms-cloud.jp"},{"robot_id": "61"},{"mission": "P4"},{"mac_id": "5beff8bdeb4f"}],
+        parameters=[{"host": "stg.rms-cloud.jp"},{"robot_id": "61"},{"mission": "P5"},{"mac_id": "5beff8bdeb4f"}],
         output='screen',
     )
     
     return LaunchDescription([
         container, 
-        python_node,
+        # python_node,
         # load_composable_nodes
     ])

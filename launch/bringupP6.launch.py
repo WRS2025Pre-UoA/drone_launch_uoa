@@ -17,23 +17,23 @@ def generate_launch_description():
                 namespace=namespace_1,
                 extra_arguments=[{"use_intra_process_comms": True}],
                 parameters=[{"mode": "P6"},
-                            {"check_duration_sec": 1.0},
-                            {"timer_interval_ms": 200},
-                            {"top_left_x": 100},
-                            {"top_left_y": 100},
-                            {"rect_width": 300},
-                            {"rect_height": 300}],
-                # remappings=[("raw_image" , "/arm_camera/realsense2_camera_node/color/image_raw")]
-                # remappings=[("raw_image" , "/camera/camera/color/image_raw")]#テスト用
-                remappings=[("raw_image" , "image_raw")]
+                            {"top_left_x": 128},
+                            {"top_left_y": 55},
+                            {"rect_width": 1000},
+                            {"rect_height": 564}],
+                # remappings=[("image_raw" , "/arm_camera/realsense2_camera_node/color/image_raw")]
+                # remappings=[("image_raw" , "/camera/camera/color/image_raw")]#テスト用
+                # remappings=[("image_raw" , "image_raw")]
             ),
-            ComposableNode( # ここにmisora2_dt_clientを入力
-                package="misora2_dt_client",
-                plugin="dt_client_component::DTClient",
-                name="confirmation_screen",
-                namespace=namespace_1,
+            ComposableNode(
+                package="misora2_distribute_image",
+                plugin="component_distribute_image::DistributeImage",
+                name="distribute_image",
                 extra_arguments=[{"use_intra_process_comms": True}],
-                parameters=[{"mode": "P6"}]
+                parameters=[{"mode": "P6"}, 
+                            {"check_duration_sec": 1.0}, 
+                            {"timer_interval_ms": 100}], #画像を何millisec間隔で流すか、また何s間流すか
+                remappings=[("raw_image" , "drone_image_cropped")],
             ),
             ComposableNode(
                 package="misora2_qr",
@@ -56,10 +56,10 @@ def generate_launch_description():
     
     python_node = Node(
         package='misora2_dt_client',
-        executable='client_node.py',
+        executable='client_node_value.py',
         name='client',
         namespace=namespace_1,
-        parameters=[{"host": ""},{"robot_id": ""},{"mission": "P6"}],
+        parameters=[{"host": "stg.rms-cloud.jp"},{"robot_id": "61"},{"mission": "P6"},{"mac_id": "5beff8bdeb4f"}],
         output='screen',
     )
     
