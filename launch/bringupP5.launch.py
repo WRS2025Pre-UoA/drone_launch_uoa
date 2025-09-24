@@ -21,9 +21,6 @@ def generate_launch_description():
                             {"top_left_y": 55},
                             {"rect_width": 1000},
                             {"rect_height": 564}],
-                # remappings=[("raw_image" , "/arm_camera/realsense2_camera_node/color/image_raw")]
-                # remappings=[("raw_image" , "/camera/camera/color/image_raw")]#テスト用
-                # remappings=[("raw_image" , "image_raw")]
             ),
             ComposableNode(
                 package="misora2_distribute_image",

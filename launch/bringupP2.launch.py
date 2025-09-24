@@ -10,9 +10,8 @@ def generate_launch_description():
         executable="component_container_mt",#マルチスレッドの場合component_container_mt,シングルはcomponent_container
         namespace="DRONE_P2",
         composable_node_descriptions=[
-            
             ComposableNode(
-         v4l2_camera v4l2_camera_node       package="drone_operation",
+                package="drone_operation",
                 plugin="component_operator_gui::DroneGUI",
                 name="drone_gui",
                 namespace=namespace_1,
@@ -22,14 +21,12 @@ def generate_launch_description():
                             {"top_left_y": 55},
                             {"rect_width": 1000},
                             {"rect_height": 564}],
-                # remappings=[("image_raw" , "/arm_camera/realsense2_camera_node/color/image_raw")]
-                # remappings=[("image_raw" , "/camera/camera/color/image_raw")]#テスト用
-                # remappings=[("image_raw" , "image_raw")]
             ),
             ComposableNode(
                 package="misora2_distribute_image",
                 plugin="component_distribute_image::DistributeImage",
                 name="distribute_image",
+                namespace=namespace_1,
                 extra_arguments=[{"use_intra_process_comms": True}],
                 parameters=[{"mode": "P2"}, 
                             {"check_duration_sec": 1.0}, 
